@@ -33,6 +33,7 @@ When deploying a Go application using Docker, the size of the final image plays 
 
 Single-Stage Dockerfile:
 
+```
 # Use the official Golang image as the base image
 
 FROM golang:1.22-alpine
@@ -61,8 +62,11 @@ EXPOSE 8080
 # Run the application
 
 CMD ["./main"]
+```
 
 Our go code for test this docker file is simple Gin get api written in main.go:
+
+```
 package main
 
 import (
@@ -82,6 +86,7 @@ r := gin.Default()
     r.Run(":8080")
 
 }
+```
 
 after building the image by `docker build -t go-app .` command, we could create and run container from our base go app image:
 `docker run -p 8080:8080 --name my-gin-app  go-app`
@@ -99,6 +104,7 @@ In addition, because the image includes unnecessary libraries, attack surface an
 
 Optimized Multi-Stage Dockerfile:
 
+```
 # Stage 1: Build the Go application
 
 FROM golang:1.22-alpine AS builder
@@ -139,6 +145,7 @@ EXPOSE 8080
 # Run the application
 
 CMD ["./main"]
+```
 
 ## 3. Key Improvements and Analysis
 
