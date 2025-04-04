@@ -1,8 +1,9 @@
-Optimizing Docker Images for Go Applications: A Multi-Stage Build Approach
+# Optimizing Docker Images for Go Applications: A Multi-Stage Build Approach
 
 Rasoul Zamani
 
-Abstract
+## Abstract
+
 Docker has revolutionized software deployment by enabling applications to run in isolated, lightweight containers, ensuring consistency across environments. However, inefficient Docker images can lead to bloated storage, slower deployments, and security vulnerabilities. Optimizing Docker images is crucial for enhancing performance, reducing attack surfaces, and minimizing resource usage that sequentially can reduce cost of our server in long term.
 
 This article explores how to optimize a Docker file for a simple Go web application built with the Gin framework by leveraging multi-stage builds approach. Initially, common single-stage Dockerfile was used, which resulted in a docker image with size of 597MB. By implementing a multi-stage method, we reduced the image size to 18MB.
@@ -11,8 +12,9 @@ This article provides a step-by-step breakdown of the optimization process, comp
 
 keywords:Docker, multi-stage Dockerfile, Dockerize Go Web App, GO, Golang.
 
-1. Introduction
-   In modern software development, Docker has become a foundational tool for building, shipping, and running applications across different environments. At its core, Docker is a containerization platform. It allows you to package your application along with all its dependencies, libraries, and configuration into a container. This guarantees that your app will run consistently, whether it's on a developer's laptop, a test server, or in the cloud. Containers isolate the application from the host system, solving the "it works on my machine" problem and enabling reproducible, reliable deployments.
+## 1. Introduction
+
+In modern software development, Docker has become a foundational tool for building, shipping, and running applications across different environments. At its core, Docker is a containerization platform. It allows you to package your application along with all its dependencies, libraries, and configuration into a container. This guarantees that your app will run consistently, whether it's on a developer's laptop, a test server, or in the cloud. Containers isolate the application from the host system, solving the "it works on my machine" problem and enabling reproducible, reliable deployments.
 
 Beyond just packaging, Docker offers fine-grained control over build environments through features like multi-stage builds. This allows developers to define multiple phases in a single Dockerfile; such as compiling the application in one stage, and producing a clean, minimal runtime image in another. The result is smaller, faster, and more secure containers, which are easier to deploy.
 
@@ -22,7 +24,7 @@ The example code in this article uses Gin, a popular and lightweight web framewo
 
 In this article, at first docker file proposed for a simple go web app code is presented. Then, docker file is optimized by the multi-stage technique and benefits of this approach are shown.
 
-2 .Methodology: Optimizing Docker Image with Multi-Stage Builds
+## 2 .Methodology: Optimizing Docker Image with Multi-Stage Builds
 
 When deploying a Go application using Docker, the size of the final image plays a critical role in performance, security, and efficiency. Initially, we used a single-stage Docker build, which resulted in an unnecessarily large image. By adopting multi-stage builds, we significantly reduced the image size while maintaining all necessary functionalities.
 
@@ -138,10 +140,11 @@ EXPOSE 8080
 
 CMD ["./main"]
 
-3. Key Improvements and Analysis
-   By adopting a multi-stage Docker build strategy, we unlocked a number of practical and measurable benefits. Beyond just reducing image size, this approach brings improvements in performance, maintainability, and security. In this section, we’ll dive into the key areas where multi-stage builds make a significant impact, from deployment speed and cost savings to cleaner architecture and a reduced attack surface.
-   Let’s explore these advantages in more detail:
-   3.1 Lower Storage Costs and Faster Deployment
+## 3. Key Improvements and Analysis
+
+By adopting a multi-stage Docker build strategy, we unlocked a number of practical and measurable benefits. Beyond just reducing image size, this approach brings improvements in performance, maintainability, and security. In this section, we’ll dive into the key areas where multi-stage builds make a significant impact, from deployment speed and cost savings to cleaner architecture and a reduced attack surface.
+Let’s explore these advantages in more detail:
+3.1 Lower Storage Costs and Faster Deployment
 
 One of the most immediate and measurable benefits of using multi-stage builds is the dramatic reduction in image size. In our case, we managed to shrink the Docker image from 597MB to just 18MB—a reduction of over 30x. This leaner image brings several operational advantages:
 
@@ -176,11 +179,14 @@ Minimized OS Footprint: Alpine Linux, commonly used in production stages, is des
 No Compiler, No Risk: Build tools like the Go compiler are powerful but unnecessary — and potentially risky — in production. Removing them prevents misuse and blocks certain types of supply chain attacks.
 
 Compliance-Friendly: For teams following security best practices or compliance standards (e.g., CIS Benchmarks, SOC2, ISO 27001), minimal images are easier to audit and lock down, making it simpler to meet organizational or regulatory requirements.
-Conclusion
+
+## Conclusion
+
 By refactoring single-stage to a multi-stage Dockerfile, the Go application's image size was successfully optimized. The transformation resulted in a much smaller (about 18MB instead of 600MB), more secure, and highly efficient image, improving both performance and deployment speed in addition to reducing server costs.
 For production environments, multi-stage builds should be considered best practice, as they help maintain a clean, lightweight, and secure Docker image.
 
-References
+## References
+
 Docker, Get Started with Docker, https://docs.docker.com/get-started/
 
 Merkel, Dirk. “Docker: Lightweight Linux Containers for Consistent Development and Deployment.” Linux Journal, 2014.
